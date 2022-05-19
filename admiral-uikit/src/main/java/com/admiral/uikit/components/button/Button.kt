@@ -21,6 +21,7 @@ import com.admiral.uikit.common.foundation.ColorState
 import com.admiral.uikit.common.util.ComponentsRadius
 import com.admiral.uikit.components.spinner.Spinner
 import com.admiral.uikit.components.text.TextView
+import com.admiral.uikit.ext.dpToPx
 import com.admiral.uikit.ext.drawable
 import com.admiral.uikit.ext.getColorOrNull
 import com.admiral.uikit.ext.parseAttrs
@@ -136,6 +137,12 @@ class Button @JvmOverloads constructor(
      * In case Drawable is null, the icon will be hidden.
      */
     var drawableStart: Drawable? = null
+        set(value) {
+            field = value
+            invalidateDrawableColors()
+        }
+
+    var drawablePadding: Int = DRAWABLE_PADDING_DEFAULT
         set(value) {
             field = value
             invalidateDrawableColors()
@@ -371,6 +378,7 @@ class Button @JvmOverloads constructor(
                 drawableEnd,
                 null
             )
+            compoundDrawablePadding = drawablePadding.dpToPx(context)
         }
     }
 
@@ -400,5 +408,6 @@ class Button @JvmOverloads constructor(
 
     private companion object {
         private const val RIPPLE_ALPHA = 0.2f
+        private const val DRAWABLE_PADDING_DEFAULT = 12
     }
 }
