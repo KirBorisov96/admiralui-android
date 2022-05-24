@@ -28,7 +28,7 @@ jobs:
           chmod +x gradlew
           ./gradlew detekt
 
-      - name: Run snapshot tests
+      - name: Run android instrumented tests (snapshot + clicker tests)
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 24
@@ -38,7 +38,7 @@ jobs:
           disable-animations: true
           script: |
             chmod +x gradlew
-            ./gradlew executeScreenshotTests
+            ./gradlew demo:connectedAndroidTest
 
       - name: Build demo release apk
         run: |
